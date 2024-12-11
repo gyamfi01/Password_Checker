@@ -32,6 +32,7 @@ word_list = load_word_list()
 password_log = []
 
 # Password strength checker
+# This function is one of the core components. It checks for key criteria like length, character diversity, and avoids predictable patterns.
 def check_password_strength(password):
     feedback = []
 
@@ -78,6 +79,7 @@ def check_password_strength(password):
     return strength, feedback
 
 # Password generator with logging
+# This function creates passwords and logs them for later analysis. It supports both word-based and fully randomized approaches.
 def generate_password(length=12, use_words=False):
     global password_log  # Use the global log
     if length < 8:
@@ -124,7 +126,8 @@ def generate_password(length=12, use_words=False):
     })
     return password
 
-# Display results as a table
+# Display the password log
+# I use this function to output all generated passwords and their feedback in a neat table format.
 def display_combined_table():
     print("\n=== Password Log Table ===")
     print(f"{'Type':<12}{'Password':<20}{'Strength':<10}{'Feedback':<60}")
@@ -134,6 +137,8 @@ def display_combined_table():
         print(f"{entry['type']:<12}{entry['password']:<20}{entry['strength']:<10}{feedback_str[:60]}...")
     print("=" * 100)
 
+# Empirical study
+# This function answers research questions about the tool's performance and reliability by testing password generation and checking.
 def empirical_study():
     global password_log  # Use the global log
     password_log.clear()  # Clear previous logs before the study
@@ -183,6 +188,7 @@ def empirical_study():
 
 
 # Flask routes
+# These routes handle the interactive parts of the app, letting users check passwords and generate new ones.
 @app.route("/")
 def index():
     return render_template("dashboard.html")
